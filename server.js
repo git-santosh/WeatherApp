@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 
 app.set('port',process.env.PORT || 3000);
 
-let siteName =   'Accurate Weather';
+let siteName =   'Accurate Weather Application';
 
 app.use((req,res,next)=>{
     res.locals.siteName = siteName;
@@ -49,7 +49,7 @@ app.use((req,res,next)=>{
 
 //Error Handler
 app.use((error,req,res,next) =>{
-    
+    console.log(error);
     res.locals.message = error.message;
     res.locals.status = error.status;
     res.locals.error = app.get('env') === 'development' ? error : {};

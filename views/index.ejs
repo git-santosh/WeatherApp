@@ -1,2 +1,17 @@
 
 <h1><%= siteName %>
+<br><br>
+<p class="static"><i>Weather in <%= data.name %></i></p>
+<div id="pricing-table" class="clear">
+
+    <div class="plan" id="most-popular">
+        <h3><%= data.name %>,<%= data.sys.country %><span><img src="<%= iconCode %>" alt=""></span></h3>
+        <pre class="signup">   <%= data.main.temp %>&deg;C </pre>    
+        <ul>
+            <li><b>temperature from</b><br><%= data.main.temp_min %> to <%= data.main.temp_max %>&deg;C </li>
+            <li><b>wind </b><%= data.wind.speed %> m/s </li>
+            <li><b>Clouds </b><%= data.clouds.all %>% </li>
+			<li><b>Geo coords </b> [<%= data.coord.lon %>,<%= data.coord.lat %>]</li>			
+        </ul>    
+    </div>
+</div>
