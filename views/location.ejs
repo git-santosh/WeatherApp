@@ -1,0 +1,54 @@
+<div class="main-header container-fluid">
+  <h1 class="text-header title"><%= siteName %></h1>
+</div>
+
+
+<div id="map" style="width:50%;height:100%; float:left;"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiaRwHqB7k_4QpmPWiPdXWAAutNW_wiC4"></script>
+
+<script>
+var data = <%- JSON.stringify(data) %>;
+console.log(data);
+var html = '<pre style="width:50%;height:100%; float:left;">'+JSON.stringify(data)+'</pre>';
+$('#map').after(html);
+$(document).ready(function(){
+  function initialize() {   
+  var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: {lat: data.city.coord.lat, lng: data.city.coord.lon},
+      scrollwheel: false
+    });
+    var geocoder = new google.maps.Geocoder();
+
+
+    let markers = [];
+      let place_id = data.city.name;
+     let position = {
+       lat: data.city.coord.lat,
+       lng: data.city.coord.lon
+     };
+
+
+     var infowindow = new google.maps.InfoWindow({
+       content: contentString,
+       maxWidth: 200
+     });
+     var pin = new google.maps.Marker({ position, map, place_id  });
+     pin.addListener('click', ()=>{infowindow.open(map, pin);});
+     markers.push(pin);
+
+
+   //Resize Function
+		google.maps.event.addDomListener(window, "resize", function() {
+			var center = map.getCenter();
+			google.maps.event.trigger(map, "resize");
+			map.setCenter(center);
+		});
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+});
+
+</script>

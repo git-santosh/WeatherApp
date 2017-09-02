@@ -36,9 +36,10 @@ app.use((req,res,next)=>{
 })
 //route define
 const index = require('./routes/index');
+const location = require('./routes/location');
 
 app.use('/',index);
-
+app.use('/location',location);
 //catch 404 and forward to error handle
 app.use((req,res,next)=>{
     const error = new Error('Not Found');
