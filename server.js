@@ -3,6 +3,7 @@ const path = require('path');
 const Layouts = require("express-ejs-layouts");
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const helpers = require('./helpers');
 const app = express();
 
 require('dotenv').config({path:'.env'});
@@ -30,6 +31,7 @@ let siteName =   'Accurate Weather Application';
 
 app.use((req,res,next)=>{
     res.locals.siteName = siteName;
+    res.locals.h = helpers;
     res.locals.watherURL = process.env.watherURL;
     res.locals.APPID = process.env.APPID;
     next();
