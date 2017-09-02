@@ -17,12 +17,20 @@ body {
   .container-fluid{
     background-color: yellowgreen
   } */
+  .whetherInfo {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+}
 .static{
    position: absolute;
    left: 100px;
    color: #d26c22
 }
-
+.pla:nth-child(2) {
+    position: absolute;
+    right: 50%;
+}
 #pricing-table {
 	margin: 100px auto;
 	text-align: center;

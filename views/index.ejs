@@ -1,6 +1,7 @@
 
 <h1><%= siteName %>
 <br><br>
+
 <p class="static"><i>Weather in <%= data.name %></i></p>
 <div id="pricing-table" class="clear">
 
@@ -14,4 +15,44 @@
 			<li><b>Geo coords </b> [<%= data.coord.lon %>,<%= data.coord.lat %>]</li>			
         </ul>    
     </div>
+    
 </div>
+
+    <div class="whetherInfo">
+        <input type="text" class="input-small1" placeholder="Enter your city Name ?"> <button onclick="myFunction()">Search</button>
+    </div>
+
+<script>
+function myFunction(){
+      var cityName = $('.input-small1').val();
+     //alert('Hi' +);
+     $.ajax({ 
+        type: "POST",
+        url: '/',
+        data: JSON.stringify({cityName: cityName}),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: successFunc,
+        error: errorFunc
+    });
+
+ }
+ 
+    function successFunc(data, status) {
+     console.log(data);
+     var ajx = data.ajx;
+
+     var html =  '<div class="plan" ">'+'<h3>'+ajx.name +' , '+ ajx.sys.country+'<span><img src="'+data["iconCode"]+'" alt=""></span></h3>'+' <pre class="signup">'+ajx.main.temp+'&deg;C </pre> <ul> <li><b>temperature from</b><br>'+ajx.main.temp_min+' to '+ajx.main.temp_max +'&deg;C </li> <li><b>wind </b>'+ajx.wind.speed+' m/s </li><li><b>Clouds </b>'+ajx.clouds.all+'% </li><li><b>Geo coords </b> <br>['+ajx.coord.lon +','+ ajx.coord.lat +']</li></ul></div>';
+     $('#pricing-table #most-popular').after(html);
+
+     
+    }
+
+    function errorFunc() {
+        alert('error');
+    }
+
+
+ 
+</script>
+
